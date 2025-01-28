@@ -8,7 +8,6 @@ Custom theme created using Shopify CLI
 
 Status | Features
 ------------ | -------------
-:heavy_check_mark: | Installing Development Tools
 :heavy_check_mark: | Navigational Bar
 :heavy_check_mark: | 404 Page
 :heavy_check_mark: | Article Page
