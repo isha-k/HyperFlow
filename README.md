@@ -15,6 +15,8 @@ Custom theme created using Shopify CLI
   <img width="12" />
 </div>
 
+[![My Skills](https://skillicons.dev/icons?i=js,html,css,tailwind)](https://skillicons.dev)
+
 Status | Features
 ------------ | -------------
 :heavy_check_mark: | Installing Development Tools
