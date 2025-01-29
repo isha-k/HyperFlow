@@ -1,7 +1,7 @@
-# Shopify Custom Theme
+# Shopify Custom Neon Theme
 
 ## ⭐ About the Project
-Custom theme created using Shopify CLI 
+Custom Neon theme created using Shopify CLI 
 
 ## ⚙️ Tech Stack
 [![My Skills](https://skillicons.dev/icons?i=js,html,css,tailwind)](https://skillicons.dev)
