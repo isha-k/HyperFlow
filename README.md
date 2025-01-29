@@ -1,7 +1,7 @@
-# Shopify Custom Neon Theme
+# Shopify Custom Theme - HyperFlow
 
 ## ⭐ About the Project
-Custom Neon theme created using Shopify CLI 
+HyperFlow UI Design: A Visually Stunning, AI-Powered Shopify Theme
 
 ## ⚙️ Tech Stack
 [![My Skills](https://skillicons.dev/icons?i=js,html,css,tailwind)](https://skillicons.dev)
