@@ -1,0 +1,107 @@
+<style>
+  .dynamic-button {
+    background-color: {{ section.settings.color_primary }};
+    color: {{ section.settings.color_secondary }}
+  }
+
+  .dynamic-button:hover {
+    transition-duration: 300ms;
+    background-color: {{ section.settings.color_hover }};
+  }
+
+  .dynamic-heading {
+    color: {{ section.settings.color_primary }};
+  }
+
+  .dynamic-text {
+    color: {{ section.settings.color_primary }};
+  }
+</style>
+
+<div class="relative w-full max-w-screen">
+  <img
+    src="{{ section.settings.main_image | image_url: width: 1920 }}"
+    class="w-full h-screen object-cover"
+    width="1920"
+    height="1080">
+
+  <!-- Overlay Content -->
+  <div class="absolute inset-0 flex flex-col justify-center text-center bg-transparent
+        {% if section.settings.text_alignment == 'left' %}items-start pl-4 sm:pl-8{% endif %}
+        {% if section.settings.text_alignment == 'middle' %}items-center{% endif %}
+        {% if section.settings.text_alignment == 'right' %}items-end pr-4 sm:pr-8{% endif %}">
+
+    <h1 class="font-bold mb-2 sm:mb-4 dynamic-heading text-xl sm:text-3xl md:text-4xl lg:text-6xl">
+      {{ section.settings.heading_text }}
+    </h1>
+    <p class="dynamic-text mb-2 sm:mb-4 text-sm sm:text-lg md:text-xl">
+      {{ section.settings.hero_text }}
+    </p>
+    <a href="/collections/all" class="dynamic-button px-4 py-2 sm:px-6 sm:py-3 rounded-lg font-medium text-sm sm:text-lg">
+      {{ section.settings.button_text }}
+    </a>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Homepage Hero Settings",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "main_image",
+        "label": "Homepage Hero Image"
+      },
+      {
+        "type": "text",
+        "id": "heading_text",
+        "label": "Hero Image Heading",
+        "default": "Welcome to Our Store"
+      },
+      {
+        "type": "text",
+        "id": "hero_text",
+        "label": "Hero Image Text",
+        "default": "Shop high end designs and fashion!"
+      },
+      {
+        "type": "text",
+        "id": "button_text",
+        "label": "Button Text",
+        "default": "Shop Now"
+      }, {
+        "type": "select",
+        "id": "text_alignment",
+        "label": "Text alignment",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          }, {
+            "value": "middle",
+            "label": "Middle"
+          }, {
+            "value": "right",
+            "label": "Right"
+          }
+        ],
+        "default": "middle"
+      }, {
+        "type": "color",
+        "id": "color_primary",
+        "label": "Color Primary",
+        "default": "#FFFFFF"
+      }, {
+        "type": "color",
+        "id": "color_secondary",
+        "label": "Color Secondary",
+        "default": "#000000"
+      }, {
+        "type": "color",
+        "id": "color_hover",
+        "label": "Color Hover",
+        "default": "#D3D3D3"
+      }
+    ]
+  }
+{% endschema %}

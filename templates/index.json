@@ -1,11 +1,17 @@
 {
     "sections": {
+        "home-image": {
+        "type": "homepage-image"
+        },
         "featured-collection": {
             "type": "featured-collection",
             "settings": {
                 "featured_collection": "all"
             }
+        },
+        "homepage-popup": {
+            "type": "homepage-popup"
         }
     },
-    "order": ["featured-collection"]
+    "order": ["home-image", "featured-collection", "homepage-popup"]
 }
