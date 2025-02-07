@@ -1,4 +1,5 @@
 <style>
+  /* Dynamic Button */
   .dynamic-button {
     background-color: {{ section.settings.color_primary }};
     color: {{ section.settings.color_secondary }};
@@ -16,32 +17,71 @@
   .dynamic-text {
     color: {{ section.settings.color_primary }};
   }
+
+  /* Hero Image Container */
+  .hero-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    max-width: 100vw;
+    overflow: hidden;
+  }
+
+  /* Background Image */
+  .hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Overlay */
+  .hero-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.2); 
+  }
+
+  /* Overlay Content */
+  .hero-content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    z-index: 2;
+  }
+
+  /* Dynamic text alignment */
+  .hero-content.left { align-items: flex-start; padding-left: 4rem; }
+  .hero-content.middle { align-items: center; }
+  .hero-content.right { align-items: flex-end; padding-right: 4rem; }
 </style>
 
-<div class="relative w-full max-w-screen">
-    <!-- Dynamic Hero Image -->
-    {% if section.settings.main_image != blank %}
-      <img
-      id="main_image"
-      src="{{ section.settings.main_image | image_url: width: 1920 }}"
-      class="w-full h-screen object-cover"
-      width="1920"
-      height="1080">
-    {% else %}
-      <img
-      id="main_image"
-      src="{{ 'home.jpg' | asset_url}}"
-      class="w-full h-screen object-cover"
-      width="1920"
-      height="1080">
-    {% endif %}
-  
-    <!-- Overlay Content -->
-    <div class="absolute inset-0 flex flex-col justify-center text-center bg-transparent
-        {% if section.settings.text_alignment == 'left' %}items-start pl-4 sm:pl-8{% endif %}
-        {% if section.settings.text_alignment == 'middle' %}items-center{% endif %}
-        {% if section.settings.text_alignment == 'right' %}items-end pr-4 sm:pr-8{% endif %}">
 
+<div class="hero-container">
+  <!-- Dynamic Hero Image -->
+  {% if section.settings.main_image != blank %}
+    <img id="main_image"
+      src="{{ section.settings.main_image | image_url: width: 1920 }}"
+      class="hero-image"
+      width="1920"
+      height="1080">
+  {% else %}
+    <img id="main_image"
+      src="{{ 'home.jpg' | asset_url}}"
+      class="hero-image"
+      width="1920"
+      height="1080">
+  {% endif %}
+
+  <!-- Overlay Content -->
+  <div class="hero-content {% if section.settings.text_alignment == 'left' %}left{% elsif section.settings.text_alignment == 'middle' %}middle{% else %}right{% endif %}">
     <h1 id="heading_text" class="font-bold mb-2 sm:mb-4 dynamic-heading text-xl sm:text-3xl md:text-4xl lg:text-6xl">
       {{ section.settings.heading_text }}
     </h1>
@@ -54,19 +94,11 @@
   </div>
 </div>
 
+
 <script>
 document.addEventListener("DOMContentLoaded", function () {
   // Get user interest from localStorage
   let userInterest = localStorage.getItem("user_interest");
-    console.log(localStorage.getItem("user_interest"));
-  // Default hero values
-  let defaultHero = {
-    image: "{{ section.settings.main_image | image_url: width: 1920 }}",
-    heading: "{{ section.settings.heading_text }}",
-    text: "{{ section.settings.hero_text }}",
-    buttonText: "{{ section.settings.button_text }}",
-    buttonLink: "/collections/all"
-  };
 
   // Merchant-defined categories
   let categories = {
