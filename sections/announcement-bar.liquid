@@ -1,0 +1,102 @@
+<style>
+  .announcement-bar {
+    font-size: 15px;
+    padding-block: 8px;
+    overflow: hidden;
+    user-select: none;
+    background-color: black;
+    color: white;
+
+    --gap: 20px;
+    display: flex;
+    gap: var(--gap);
+  }
+
+  .announcement-bar ul {
+    list-style: none;
+    flex-shrink: 0;
+    min-width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--gap);
+
+    animation: scroll 20s linear infinite;
+  }
+  @keyframes scroll {
+    to {
+      transform: translateX(calc(-100% - var(--gap)));
+    }
+  }
+
+  /* Hide the static div by default */
+.static-announcement {
+  display: none;
+}
+
+/* Desktop View: Show Static Text & Hide Scrolling Banner */
+@media (min-width: 1024px) {
+  .announcement-bar {
+    display: none; /* Hide scrolling banner */
+}
+
+.static-announcement {
+display: flex; /* Show static announcement */
+justify-content: center;
+align-items: center;
+font-size: 15px;
+padding-block: 8px;
+background-color: black;
+color: white;
+}
+</style>
+
+<div class="announcement-bar">
+  <ul>
+    <li>|</li>
+    <li>{{ section.settings.message_1 | upcase }}</li>
+    <li>|</li>
+    <li>{{ section.settings.message_2 | upcase }}</li>
+    <li>|</li>
+    <li>{{ section.settings.message_3 | upcase}}</li>
+  </ul>
+
+  <ul aria-hidden="true">
+    <li>|</li>
+    <li>{{ section.settings.message_1 | upcase}}</li>
+    <li>|</li>
+    <li>{{ section.settings.message_2 | upcase}}</li>
+    <li>|</li>
+    <li>{{ section.settings.message_3 | upcase}}</li>
+  </ul>
+</div>
+
+<div class="static-announcement">
+    {{ section.settings.message_1 | upcase}} | {{ section.settings.message_2 | upcase}} | {{ section.settings.message_3 | upcase}}
+</div>
+
+{% schema %}
+    {
+      "name": "Announcement Bar",
+      "settings": [
+        {
+            "type": "text",
+            "id": "message_1",
+            "default": "Summer collection launching soon",
+            "label": "Message 1"
+        },
+        {
+            "type": "text",
+            "id": "message_2",
+            "default": "Free shipping available",
+            "label": "Message 2"
+        },
+        {
+            "type": "text",
+            "id": "message_3",
+            "default": "Buy now pay later",
+            "label": "Message 3"
+        }
+      ]
+    }
+{% endschema %}
