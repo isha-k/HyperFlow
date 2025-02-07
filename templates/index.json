@@ -11,7 +11,10 @@
         },
         "split-hero": {
             "type": "split-hero"
+        },
+        "newsletter-subscribe": {
+            "type": "newsletter"
         }
     },
-    "order": ["home-image", "featured-collection", "split-hero"]
+    "order": ["home-image", "featured-collection", "split-hero", "newsletter-subscribe"]
 }
