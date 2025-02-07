@@ -28,5 +28,20 @@
     <main role="main">
       {{ content_for_layout }}
     </main>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      function updateUserInterest(category) {
+        localStorage.setItem("user_interest", category);
+      }
+
+       // Check if the page is a collection page
+      {% if collection %}
+        let correctCollectionTitle = "{{ collection.title }}";  
+        updateUserInterest(correctCollectionTitle);
+      {% endif %}
+    });
+    </script>
+
   </body>
 </html>

@@ -8,10 +8,7 @@
             "settings": {
                 "featured_collection": "all"
             }
-        },
-        "homepage-popup": {
-            "type": "homepage-popup"
         }
     },
-    "order": ["home-image", "featured-collection", "homepage-popup"]
+    "order": ["home-image", "featured-collection"]
 }

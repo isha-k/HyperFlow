@@ -1,7 +1,7 @@
 <style>
   .dynamic-button {
     background-color: {{ section.settings.color_primary }};
-    color: {{ section.settings.color_secondary }}
+    color: {{ section.settings.color_secondary }};
   }
 
   .dynamic-button:hover {
@@ -19,29 +19,92 @@
 </style>
 
 <div class="relative w-full max-w-screen">
-  <img
-    src="{{ section.settings.main_image | image_url: width: 1920 }}"
-    class="w-full h-screen object-cover"
-    width="1920"
-    height="1080">
-
-  <!-- Overlay Content -->
-  <div class="absolute inset-0 flex flex-col justify-center text-center bg-transparent
+    <!-- Dynamic Hero Image -->
+    {% if section.settings.main_image != blank %}
+      <img
+      id="main_image"
+      src="{{ section.settings.main_image | image_url: width: 1920 }}"
+      class="w-full h-screen object-cover"
+      width="1920"
+      height="1080">
+    {% else %}
+      <img
+      id="main_image"
+      src="{{ 'home.jpg' | asset_url}}"
+      class="w-full h-screen object-cover"
+      width="1920"
+      height="1080">
+    {% endif %}
+  
+    <!-- Overlay Content -->
+    <div class="absolute inset-0 flex flex-col justify-center text-center bg-transparent
         {% if section.settings.text_alignment == 'left' %}items-start pl-4 sm:pl-8{% endif %}
         {% if section.settings.text_alignment == 'middle' %}items-center{% endif %}
         {% if section.settings.text_alignment == 'right' %}items-end pr-4 sm:pr-8{% endif %}">
 
-    <h1 class="font-bold mb-2 sm:mb-4 dynamic-heading text-xl sm:text-3xl md:text-4xl lg:text-6xl">
+    <h1 id="heading_text" class="font-bold mb-2 sm:mb-4 dynamic-heading text-xl sm:text-3xl md:text-4xl lg:text-6xl">
       {{ section.settings.heading_text }}
     </h1>
-    <p class="dynamic-text mb-2 sm:mb-4 text-sm sm:text-lg md:text-xl">
+    <p id="hero_text" class="dynamic-text mb-2 sm:mb-4 text-sm sm:text-lg md:text-xl">
       {{ section.settings.hero_text }}
     </p>
-    <a href="/collections/all" class="dynamic-button px-4 py-2 sm:px-6 sm:py-3 rounded-lg font-medium text-sm sm:text-lg">
+    <a href="/collections/all" id="button_text" class="dynamic-button px-4 py-2 sm:px-6 sm:py-3 rounded-lg font-medium text-sm sm:text-lg">
       {{ section.settings.button_text }}
     </a>
   </div>
 </div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  // Get user interest from localStorage
+  let userInterest = localStorage.getItem("user_interest");
+    console.log(localStorage.getItem("user_interest"));
+  // Default hero values
+  let defaultHero = {
+    image: "{{ section.settings.main_image | image_url: width: 1920 }}",
+    heading: "{{ section.settings.heading_text }}",
+    text: "{{ section.settings.hero_text }}",
+    buttonText: "{{ section.settings.button_text }}",
+    buttonLink: "/collections/all"
+  };
+
+  // Merchant-defined categories
+  let categories = {
+    "{{ section.settings.category_1_collection.title }}": {
+      image: "{{ section.settings.category_1_image | image_url: width: 1920 }}",
+      heading: "{{ section.settings.category_1_collection.title }}",
+      text: "Shop our latest {{ section.settings.category_1_name }} collection!",
+      buttonText: "Shop Now",
+      buttonLink: "{{ section.settings.category_1_link }}"
+    },
+    "{{ section.settings.category_2_collection.title }}": {
+      image: "{{ section.settings.category_2_image | image_url: width: 1920 }}",
+      heading: "{{ section.settings.category_2_collection.title }}",
+      text: "Find the best {{ section.settings.category_2_name }} here!",
+      buttonText: "Discover More",
+      buttonLink: "{{ section.settings.category_2_link }}"
+    },
+    "{{ section.settings.category_3_collection.title }}": {
+      image: "{{ section.settings.category_3_image | image_url: width: 1920 }}",
+      heading: "{{ section.settings.category_3_collection.title }}",
+      text: "Explore {{ section.settings.category_3_name }} now!",
+      buttonText: "View Collection",
+      buttonLink: "{{ section.settings.category_3_link }}"
+    }
+  };
+  
+  // If user has an interest, update the hero section dynamically
+  if (userInterest && categories[userInterest]) {
+    console.log("Category found!!!!");
+    document.getElementById("main_image").src = categories[userInterest].image;
+    document.getElementById("heading_text").innerText = categories[userInterest].heading;
+    document.getElementById("hero_text").innerText = categories[userInterest].text;
+    document.getElementById("button_text").innerText = categories[userInterest].buttonText;
+    document.getElementById("button_text").href = categories[userInterest].buttonLink;
+  }
+ 
+});
+</script>
 
 {% schema %}
   {
@@ -50,7 +113,7 @@
       {
         "type": "image_picker",
         "id": "main_image",
-        "label": "Homepage Hero Image"
+        "label": "Default Hero Image"
       },
       {
         "type": "text",
@@ -62,14 +125,60 @@
         "type": "text",
         "id": "hero_text",
         "label": "Hero Image Text",
-        "default": "Shop high end designs and fashion!"
+        "default": "Discover our latest collection!"
       },
       {
         "type": "text",
         "id": "button_text",
         "label": "Button Text",
         "default": "Shop Now"
-      }, {
+      },
+      {
+        "type": "image_picker",
+        "id": "category_1_image",
+        "label": "Category 1 Image"
+      },
+      {
+        "type": "collection",
+        "id": "category_1_collection",
+        "label": "Category 1 Collection"
+      },
+      {
+        "type": "url",
+        "id": "category_1_link",
+        "label": "Category 1 Link"
+      },
+      {
+        "type": "image_picker",
+        "id": "category_2_image",
+        "label": "Category 2 Image"
+      },
+      {
+        "type": "collection",
+        "id": "category_2_collection",
+        "label": "Select Category 2 Collection"
+      },
+      {
+        "type": "url",
+        "id": "category_2_link",
+        "label": "Category 2 Link"
+      },
+      {
+        "type": "image_picker",
+        "id": "category_3_image",
+        "label": "Category 3 Image"
+      },
+      {
+        "type": "collection",
+        "id": "category_3_collection",
+        "label": "Category 3 Collection"
+      },
+      {
+        "type": "url",
+        "id": "category_3_link",
+        "label": "Category 3 Link"
+      },
+      {
         "type": "select",
         "id": "text_alignment",
         "label": "Text alignment",
@@ -86,17 +195,20 @@
           }
         ],
         "default": "middle"
-      }, {
+      }, 
+      {
         "type": "color",
         "id": "color_primary",
         "label": "Color Primary",
         "default": "#FFFFFF"
-      }, {
+      }, 
+      {
         "type": "color",
         "id": "color_secondary",
         "label": "Color Secondary",
         "default": "#000000"
-      }, {
+      }, 
+      {
         "type": "color",
         "id": "color_hover",
         "label": "Color Hover",
@@ -104,4 +216,5 @@
       }
     ]
   }
-{% endschema %}
+  {% endschema %}
+  
