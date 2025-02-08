@@ -8,19 +8,13 @@ window.addEventListener('load', () => {
             scrollTrigger: {
                 trigger: ".wrapper",
                 start: "top top",
-                end: '+=150%',
+                end: '+=250%',
                 pin: true,
                 scrub: true,
             },
         })
-        .to("img", {
-            scale: 2,
-            z: 350,
-            transformOrigin: 'center center',
-            ease: "power1.inOut",
-        })
-        .to("section-hero", {
-            scale: 1.1,
+        .to(".overlay-text", {
+            transform: "translate(-50%, -50%) scale(2)",
             transformOrigin: 'center center',
             ease: "power1.inOut",
         },

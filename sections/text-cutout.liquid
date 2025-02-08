@@ -4,6 +4,7 @@
         position: relative;
         width: 100%;
         z-index: 1;
+        overflow-x: hidden;
     }
     .content {
         overflow: hidden;
@@ -17,7 +18,7 @@
         background-repeat: no-repeat;
         background-size: cover;
     }
-    .image-container {
+    .video-container {
         width: 100%;
         height: 100vh;
         position: absolute;
@@ -28,11 +29,33 @@
         perspective: 500px;
         overflow: hidden;
     }
-    .image-container img{
+    .video-container video{
         width: 100%;
         height: 100%;
         object-fit: cover;
         object-position: center center;
+    }
+    .overlay-text {
+        width: 100%;
+        height: 100vh;
+        /* background-color: black;*/
+        color: white; 
+        font-size: 10vw; 
+        font-weight: bold;
+        margin: ;
+        text-align: center; /* Center text horizontally */
+        position: absolute; /* Position text relative to the container */
+        top: 50%; /* Position vertically at the middle */
+        left: 50%; /* Position horizontally at the middle */
+        display: flex; /* Use flexbox for centering */
+        justify-content: center; /* Center text horizontally */
+        align-items: center;
+        transform: translate(-110%, 50%) scale(200);
+        z-index: 3;
+        background-color: black;
+        color: white;
+        mix-blend-mode: multiply;
+  
     }
 </style>
 
@@ -42,10 +65,15 @@
         <section class="section-gradient-purple"></section>
         <section class="section-gradient-blue"></section>
     </div>
-    <div class="image-container">
-        <img 
-        src="{{ 'home.jpg' | asset_url}}"
-        width="1920"
-        height="1080">
+    <div class="video-container">
+        {% if section.settings.video != blank %}
+            {% assign media = section.settings.video %}
+            {{ media | video_tag: autoplay: true, loop: true, muted: true, controls: false }}
+        {% else %}
+            <video src="{{ 'scroll-video.mp4' | asset_url }}" autoplay loop muted >
+                Your browser does not support the video tag.
+            </video>
+        {% endif %}
+        <div class="overlay-text">NEW IN</div>
     </div>
 </div>

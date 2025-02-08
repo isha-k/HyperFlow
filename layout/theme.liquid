@@ -12,7 +12,7 @@
     {{ 'application.css' | asset_url | stylesheet_tag }}
     <script src="{{ 'application.js' | asset_url }}" defer></script>
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    
+
     <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
     <script defer src="{{ 'custom.js' | asset_url }}"></script>
@@ -27,6 +27,7 @@
       <!-- JPEG Favicon (less common but works for many cases) -->
       <link rel="icon" href="{{ settings.favicon_image | file_url }}" type="image/jpeg">
     {% endif %}    
+    
   </head>
   <body>
     {% section 'announcement-bar' %}
