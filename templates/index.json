@@ -14,7 +14,10 @@
         },
         "newsletter-subscribe": {
             "type": "newsletter"
+        },
+        "text-cutout": {
+            "type": "text-cutout"
         }
     },
-    "order": ["home-image", "featured-collection", "split-hero", "newsletter-subscribe"]
+    "order": ["home-image", "featured-collection", "split-hero", "newsletter-subscribe", "text-cutout"]
 }
