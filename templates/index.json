@@ -17,7 +17,10 @@
         },
         "text-cutout": {
             "type": "text-cutout"
-        }
+        },
+        "collection-cards": {
+            "type": "template-shop-now"
+        },
     },
-    "order": ["home-image", "featured-collection", "split-hero", "newsletter-subscribe", "text-cutout"]
+    "order": ["home-image", "featured-collection", "split-hero", "newsletter-subscribe", "text-cutout", "collection-cards"]
 }

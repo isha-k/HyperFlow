@@ -1,0 +1,42 @@
+<section class=" flex flex-wrap gap-10 w-full justify-center items-center p-4">
+<div class="relative group w-80">
+            <span class="flex flex-col justify-center items-center">
+                {% if section.settings.main_image != blank %}
+                    <img id="main_image"
+                      src="{{ section.settings.main_image | image_url: width: 1920 }}"
+                      class="hero-image"
+                      width="1920"
+                      height="1080">
+                  {% else %}
+                    <img id="main_image"
+                    alt="dress-1"
+                    src="{{ 'ShopNow/dress-1' | asset_url}}"
+                    class="w-full h-full object-cover rounded-lg"
+                    width="1920"
+                    height="1080">
+                {% endif %}
+            </span>
+</div>
+<div class="relative group w-80 ">
+            <span class="flex flex-col justify-center items-center">
+                <img
+                    src="https://cdn.pixabay.com/photo/2020/09/20/16/27/model-5587623_960_720.jpg"
+                    alt="Sample"
+                    class="w-full h-full object-cover rounded-lg"
+                        height="1920"
+                    width="1080"
+                />
+            </span>
+</div>
+<div class="relative group w-80">
+            <span class="flex flex-col justify-center items-center">
+                <img
+                    src="https://cdn.pixabay.com/photo/2019/12/10/13/31/woman-4685862_960_720.jpg"
+                    alt="Sample"
+                    class="w-full h-full object-cover rounded-lg"
+                        height="1920"
+                    width="1080"
+                />
+            </span>
+</div>
+</section>

@@ -14,7 +14,7 @@ window.addEventListener('load', () => {
             },
         })
         .to(".overlay-text", {
-            transform: "translate(-50%, -50%) scale(2)",
+            transform: "translate(-50%, -50%) scale(1.7)",
             transformOrigin: 'center center',
             ease: "power1.inOut",
         },
